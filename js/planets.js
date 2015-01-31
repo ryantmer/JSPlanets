@@ -51,9 +51,10 @@ function showHideSettings(checkbox) {
 }
 
 function showHideOrbits(checkbox) {
-    var orbits = document.getElementsByClassName("orbit");
+    var orbits = document.getElementsByClassName("orbit"),
+        i;
 
-    for (var i = 0; i < orbits.length; ++i) {
+    for (i = 0; i < orbits.length; i += 1) {
         if (checkbox.checked) {
             orbits[i].style.setProperty("border-width", "1px");
         } else {
@@ -62,57 +63,9 @@ function showHideOrbits(checkbox) {
     }
 }
 
-function updateDiameter(event) {
-    var planet = allPlanets[event.target.id.replace("-diameter-input", "")];
-
-    planet.diameter = event.target.value;
-    updatePlanet(planet.name);
-}
-
-function updateOrbit(event) {
-    var planet = allPlanets[event.target.id.replace("-orbit-input", "")];
-
-    planet.orbit = event.target.value;
-    // planet.period = Math.pow(4 * Math.pow(Math.PI, 2) * Math.pow((planet.orbit * 1000 / 2), 3) / (G * sun.mass), 1 / 2) / 86400;
-    updatePlanet(planet.name);
-    updatePlanetOptions(planet.name);
-}
-
-function updatePeriod(event) {
-    var planet = allPlanets[event.target.id.replace("-period-input", "")];
-
-    planet.period = event.target.value;
-    // planet.orbit = 2 * Math.pow(G * sun.mass * Math.pow(planet.period * 86400, 2) / (4 * Math.pow(Math.PI, 2)), 1 / 3) / 1000;
-    updatePlanet(planet.name);
-    updatePlanetOptions(planet.name);
-}
-
-function updateFactor(event) {
-    var pKey,
-        planet;
-
-    if (event.target.id == "period-factor") {
-        periodFactor = event.target.value;
-    } else if (event.target.id == "diameter-factor") {
-        diameterFactor = event.target.value;
-    } else if (event.target.id == "sun-diameter-factor") {
-        sunDiameterFactor = event.target.value;
-        updateSun();
-    } else if (event.target.id == "orbit-factor") {
-        orbitFactor = event.target.value;
-    }
-
-    for (pKey in allPlanets) {
-        planet = allPlanets[pKey];
-        updatePlanet(planet.name);
-        updatePlanetOptions(planet.name);
-    }
-}
-
 function updatePlanet(name) {
-    var body = document.getElementsByTagName("body")[0],
-        planet = allPlanets[name];
-        orbitDiv = document.getElementById(name + "-orbit");
+    var planet = allPlanets[name],
+        orbitDiv = document.getElementById(name + "-orbit"),
         planetDiv = document.getElementById(name);
 
     orbitDiv.style.setProperty("width", planet.orbit / orbitFactor + "px");
@@ -155,19 +108,75 @@ function createSun() {
     body.appendChild(sunDiv);
 }
 
+function updateDiameter(event) {
+    var planet = allPlanets[event.target.id.replace("-diameter-input", "")];
+
+    planet.diameter = event.target.value;
+    updatePlanet(planet.name);
+}
+
+function updateOrbit(event) {
+    var planet = allPlanets[event.target.id.replace("-orbit-input", "")];
+
+    planet.orbit = event.target.value;
+    // planet.period = Math.pow(4 * Math.pow(Math.PI, 2) * Math.pow((planet.orbit * 1000 / 2), 3) / (G * sun.mass), 1 / 2) / 86400;
+    updatePlanet(planet.name);
+    updatePlanetOptions(planet.name);
+}
+
+function updatePeriod(event) {
+    var planet = allPlanets[event.target.id.replace("-period-input", "")];
+
+    planet.period = event.target.value;
+    // planet.orbit = 2 * Math.pow(G * sun.mass * Math.pow(planet.period * 86400, 2) / (4 * Math.pow(Math.PI, 2)), 1 / 3) / 1000;
+    updatePlanet(planet.name);
+    updatePlanetOptions(planet.name);
+}
+
+function updateFactor(event) {
+    var pKey,
+        planet;
+
+    if (event.target.id === "period-factor") {
+        periodFactor = event.target.value;
+    } else if (event.target.id === "diameter-factor") {
+        diameterFactor = event.target.value;
+    } else if (event.target.id === "sun-diameter-factor") {
+        sunDiameterFactor = event.target.value;
+        createSun();
+    } else if (event.target.id === "orbit-factor") {
+        orbitFactor = event.target.value;
+    }
+
+    for (pKey in allPlanets) {
+        planet = allPlanets[pKey];
+        updatePlanet(planet.name);
+        updatePlanetOptions(planet.name);
+    }
+}
+
 function createPlanet(name) {
     var body = document.getElementsByTagName("body")[0],
         orbitDiv = document.createElement("div"),
         planetDiv = document.createElement("div");
 
     orbitDiv.setAttribute("class", "orbit");
-    orbitDiv.setAttribute("id", name+"-orbit");
+    orbitDiv.setAttribute("id", name + "-orbit");
     planetDiv.setAttribute("class", "planet");
     planetDiv.setAttribute("id", name);
     orbitDiv.appendChild(planetDiv);
     body.appendChild(orbitDiv);
 
     updatePlanet(name);
+}
+
+function deletePlanet(event) {
+    var body = document.getElementsByTagName("body")[0],
+        settings = document.getElementById("settings");
+
+    body.removeChild(document.getElementById(event.target.id.replace("-delete", "-orbit")));
+    settings.removeChild(document.getElementById(event.target.id.replace("-delete", "-options")));
+    delete allPlanets[event.target.id.replace("-delete", "")];
 }
 
 function createOptionPanel(name) {
@@ -195,7 +204,7 @@ function createOptionPanel(name) {
     e = document.createElement("b");
     e.setAttribute("id", planet.name + "-label");
     e.style.setProperty("text-align", "left");
-    e.innerHTML = planet.name 
+    e.innerHTML = planet.name;
     div.appendChild(e);
 
     div.appendChild(document.createElement("br"));
@@ -225,7 +234,7 @@ function createOptionPanel(name) {
     e.setAttribute("id", planet.name + "-period-input");
     e.setAttribute("step", "1");
     e.setAttribute("min", "1");
-    e.addEventListener("change", updatePeriod)
+    e.addEventListener("change", updatePeriod);
     div.appendChild(e);
 
     div.appendChild(document.createElement("br"));
@@ -240,14 +249,14 @@ function createOptionPanel(name) {
     e.setAttribute("id", planet.name + "-orbit-input");
     e.setAttribute("step", "100000");
     e.setAttribute("min", "1");
-    e.addEventListener("change", updateOrbit)
+    e.addEventListener("change", updateOrbit);
     div.appendChild(e);
 
     updatePlanetOptions(name);
 }
 
 function addPlanet(event) {
-    var newPlanet = {}
+    var newPlanet = {};
     newPlanet.diameter = 10000;
     newPlanet.colour = document.getElementById("new-planet-colour").value;
     newPlanet.period = 100;
@@ -263,15 +272,6 @@ function addPlanet(event) {
 
     createPlanet(newPlanet.name);
     createOptionPanel(newPlanet.name);
-}
-
-function deletePlanet(event) {
-    var body = document.getElementsByTagName("body")[0],
-        settings = document.getElementById("settings");
-
-    body.removeChild(document.getElementById(event.target.id.replace("-delete", "-orbit")));
-    settings.removeChild(document.getElementById(event.target.id.replace("-delete", "-options")));
-    delete allPlanets[event.target.id.replace("-delete", "")];
 }
 
 function setup() {
@@ -309,4 +309,4 @@ function setup() {
 
 //Set orbitFactor s.t. Mars' default orbit fills ~90% of screen
 var orbitFactor = 228000000 * 2 / Math.min(window.innerWidth, window.innerHeight) * 1.1;
-window.onload = setup
+window.onload = setup;
