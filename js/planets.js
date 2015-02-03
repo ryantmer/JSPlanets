@@ -308,5 +308,5 @@ function setup() {
 }
 
 //Set orbitFactor s.t. Mars' default orbit fills ~90% of screen
-var orbitFactor = 228000000 * 2 / Math.min(window.innerWidth, window.innerHeight) * 1.1;
+orbitFactor = 228000000 * 2 / Math.min(window.innerWidth, window.innerHeight) * 1.1;
 window.onload = setup;

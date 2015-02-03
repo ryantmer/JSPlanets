@@ -1,0 +1,30 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="css/planets.css" />
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script type="text/javascript" src="js/planets-jquery.js"></script>
+    </head>
+    <body>
+        <div id="controls-box">
+            <input type="checkbox" id="hide-settings" checked="true">
+            <label for="hide-settings" id="hide-settings-label">Hide</label>
+            <div id="settings" style="display:none;">
+                <h2>Planet Options</h2>
+                <input type="checkbox" id="show-orbits" onclick="showHideOrbits(this);">
+                <label for="show-orbits" id="show-orbits-label">Show Orbits</label><br/>
+                Period: 1s =<input type="number" id="period-factor" step="1" min="1">days<br/>
+                Planet Diameter: 1px =<input type="number" id="diameter-factor" step="1" min="1">km<br/>
+                Sun Diameter: 1px =<input type="number" id="sun-diameter-factor" step="1" min="1">km<br/>
+                Orbit: 1px =<input type="number" id="orbit-factor" step="1" min="1">km<br/>
+                <div id="add-planet" class="planet-options">
+                    <label for="new-planet-name">Name</label>
+                    <input type="text" id="new-planet-name"><br/>
+                    <label for="new-planet-colour">Colour</label>
+                    <input type="text" id="new-planet-colour"><br/>
+                    <input type="button" id="new-planet-button" value="Add New Planet">
+                </div>
+            </div>
+        </div>
+        <footer>Kepler would roll in his grave. Do not use for navigation.</footer>
+    </body>
+</html>
