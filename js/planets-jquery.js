@@ -38,8 +38,8 @@ function createPlanet(name) {
                 value: "Remove"
             })
             .click(function() {
-                $("#" + name + "-orbit").remove();
-                $("#" + name + "-options").remove();
+                $("#" + name + "-orbit").hide("slow", function() { $(this).remove() });
+                $("#" + name + "-options").hide("slow", function() { $(this).remove() });
                 delete allPlanets[name];
             }))
         .append( //Planet name
@@ -63,11 +63,11 @@ function createPlanet(name) {
             .on("change", function() {
                 allPlanets[name].diameter = $(this).val();
                 updatePlanet(name);
-            })
+            }))
         .append(
         $(document.createElement("br")))
         .append( //Period label
-        $(document.createElement("label")))
+        $(document.createElement("label"))
             .attr("for", name + "-period-input")
             .html("Period (days):"))
         .append( //Period input
@@ -100,7 +100,7 @@ function createPlanet(name) {
                 allPlanets[name].orbit = $(this).val();
                 updatePlanet(name);
             })
-        )
+        );
 
     updatePlanet(name);
 }
