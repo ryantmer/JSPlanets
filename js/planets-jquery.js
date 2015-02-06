@@ -6,10 +6,10 @@ var G = 6.67384e-11;
 
 //Diameter, orbit in km; period in days
 var sun = {"name": "Sun", "diameter": 695800 * 2, "colour": "yellow", "mass": 1.989e30};
-var mercury = {"name": "Mercury", "diameter": 2440 * 2, "colour": "brown", "period": 7603200 / 86400, "orbit": 58000000 * 2};
-var venus = {"name": "Venus", "diameter": 6052 * 2, "colour": "darkolivegreen", "period": 19414080 / 86400, "orbit": 108000000 * 2};
-var earth = {"name": "Earth", "diameter": 6371 * 2, "colour": "powderblue", "period": 31557600 / 86400, "orbit": 150000000 * 2};
-var mars = {"name": "Mars", "diameter": 3390 * 2, "colour": "red", "period": 59356800 / 86400, "orbit": 228000000 * 2};
+var mercury = {"name": "Mercury", "diameter": 4880, "colour": "brown", "period": 88, "orbit": 116000000};
+var venus = {"name": "Venus", "diameter": 12104, "colour": "darkolivegreen", "period": 224.7, "orbit": 216000000};
+var earth = {"name": "Earth", "diameter": 12742, "colour": "powderblue", "period": 365.25, "orbit": 300000000};
+var mars = {"name": "Mars", "diameter": 6780, "colour": "red", "period": 687, "orbit": 456000000};
 var allPlanets = {"Mercury": mercury, "Venus": venus, "Mars": mars, "Earth": earth};
 
 function createPlanet(name) {
