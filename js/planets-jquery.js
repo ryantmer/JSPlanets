@@ -5,11 +5,11 @@ var orbitFactor = 1e6;
 var G = 6.67384e-11;
 
 //Diameter, orbit in km; period in days
-var sun = {"name": "Sun", "diameter": 695800 * 2, "colour": "yellow", "mass": 1.989e30};
-var mercury = {"name": "Mercury", "diameter": 4880, "colour": "brown", "period": 88, "orbit": 116000000};
-var venus = {"name": "Venus", "diameter": 12104, "colour": "darkolivegreen", "period": 224.7, "orbit": 216000000};
-var earth = {"name": "Earth", "diameter": 12742, "colour": "powderblue", "period": 365.25, "orbit": 300000000};
-var mars = {"name": "Mars", "diameter": 6780, "colour": "red", "period": 687, "orbit": 456000000};
+var sun = {name: "Sun", diameter: 695800 * 2, colour: "yellow", mass: 1.989e30};
+var mercury = {name: "Mercury", diameter: 4880, colour: "brown", period: 88, orbit: 116000000};
+var venus = {name: "Venus", diameter: 12104, colour: "darkolivegreen", period: 224.7, orbit: 216000000};
+var earth = {name: "Earth", diameter: 12742, colour: "powderblue", period: 365.25, orbit: 300000000};
+var mars = {name: "Mars", diameter: 6780, colour: "red", period: 687, orbit: 456000000};
 var allPlanets = {"Mercury": mercury, "Venus": venus, "Mars": mars, "Earth": earth};
 
 function createPlanet(name) {
@@ -171,11 +171,11 @@ $(document).ready(function() {
 
     $("#new-planet-button").click(function() {
         var newPlanet = {
-            "diameter": 10000,
-            "colour": $("#new-planet-colour").val(),
-            "period": 100,
-            "orbit": 100000000 * 2,
-            "name": $("#new-planet-name").val()
+            diameter: 10000,
+            colour: $("#new-planet-colour").val(),
+            period: 100,
+            orbit: 100000000 * 2,
+            name: $("#new-planet-name").val()
         }
 
         if (allPlanets[newPlanet.name]) {

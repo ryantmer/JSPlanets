@@ -5,40 +5,12 @@ var orbitFactor = 1e6;
 var G = 6.67384e-11;
 
 //Diameter, orbit in km; period in days
-var sun = {};
-sun.name = "sun";
-sun.diameter = 695800 * 2;
-sun.colour = "yellow";
-sun.mass = 1.989e30;
-var allPlanets = {};
-var mercury = {};
-mercury.name = "Mercury";
-mercury.diameter = 2440 * 2;
-mercury.colour = "brown";
-mercury.period = 7603200 / 86400;
-mercury.orbit = 58000000 * 2;
-allPlanets.Mercury = mercury;
-var venus = {};
-venus.name = "Venus";
-venus.diameter = 6052 * 2;
-venus.colour = "darkolivegreen";
-venus.period = 19414080 / 86400;
-venus.orbit = 108000000 * 2;
-allPlanets.Venus = venus;
-var earth = {};
-earth.name = "Earth";
-earth.diameter = 6371 * 2;
-earth.colour = "powderblue";
-earth.period = 31557600 / 86400;
-earth.orbit = 150000000 * 2;
-allPlanets.Earth = earth;
-var mars = {};
-mars.name = "Mars";
-mars.diameter = 3390 * 2;
-mars.colour = "red";
-mars.period = 59356800 / 86400;
-mars.orbit = 228000000 * 2;
-allPlanets.Mars = mars;
+var sun = {name: "Sun", diameter: 695800 * 2, colour: "yellow", mass: 1.989e30};
+var mercury = {name: "Mercury", diameter: 4880, colour: "brown", period: 88, orbit: 116000000};
+var venus = {name: "Venus", diameter: 12104, colour: "darkolivegreen", period: 224.7, orbit: 216000000};
+var earth = {name: "Earth", diameter: 12742, colour: "powderblue", period: 365.25, orbit: 300000000};
+var mars = {name: "Mars", diameter: 6780, colour: "red", period: 687, orbit: 456000000};
+var allPlanets = {"Mercury": mercury, "Venus": venus, "Mars": mars, "Earth": earth};
 
 function showHideSettings(checkbox) {
     var settings = document.getElementById("settings");
